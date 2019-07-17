@@ -1,0 +1,31 @@
+﻿@model WebApplication3.Models.TextboxModel
+
+@{
+   string action = @ViewBag.PostAction;
+}
+<div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">Edit textbox</h4>
+    </div>
+    <div class="modal-body">
+        @using (Html.BeginForm(action, WebApplication3.Common.Constants.CONTROLS_VIEW_NAME, FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td class="bottompadding">BorderColor</td>
+                    <td class="bottompadding">@Html.TextBoxFor(x => x.BorderColor)</td>
+                </tr>
+                <tr>
+                    <td class="bottompadding">TextColor</td>
+                    <td class="bottompadding">@Html.TextBoxFor(x => x.TextColor)</td>
+                </tr>
+                <tr>
+                    <td class="rightpadding">DefaultText</td>
+                    <td>@Html.TextBoxFor(x => x.DefaultText)</td>
+                </tr>
+            </table>
+            <input type="submit" value="Save changes" class="saveButton"/>
+        }
+    </div>
+</div>

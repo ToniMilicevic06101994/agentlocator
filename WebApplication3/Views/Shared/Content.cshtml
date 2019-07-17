@@ -1,0 +1,81 @@
+﻿@model WebApplication3.Models.ControlsModel
+
+<style>
+.textbox1 {
+	color: @Model.Textbox1.TextColor;
+	border-color: @Model.Textbox1.BorderColor;
+}
+
+.textbox2 {
+	color: @Model.Textbox2.TextColor;
+	border-color: @Model.Textbox2.BorderColor;
+}
+
+.picker {
+	color: @Model.DatetimePicker.TextColor;
+}
+
+.button {
+	color: @Model.Button.TextColor;
+	border-color: @Model.Button.BorderColor;
+}
+</style>
+
+<br />
+<input class="textbox1" id="textbox1" type="text" value="@Model.Textbox1.DefaultText" />
+<br />
+<br />
+<input class="textbox2" id="textbox2" type="text" value="@Model.Textbox2.DefaultText" />
+<br />
+<br />
+<input class="picker" id="dateTimePicker" type="@Model.DatetimePicker.Type" />
+<br />
+<br />
+<input class="button" id="button" type="button" value="@Model.Button.Text" />
+
+@if (ViewBag.Editable)
+{
+    <div id='myModal' class='modal'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.10.0.min.js" integrity="sha256-2+LznWeWgL7AJ1ciaIG5rFP7GKemzzl+K75tRyTByOE=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $("#textbox1").click(function () {
+                showModal('textbox1');
+            });
+            $("#textbox2").click(function () {
+                showModal('textbox2');
+            });
+            $("#dateTimePicker").click(function () {
+                showModal('datetime');
+            });
+            $("#button").click(function () {
+                showModal('button');
+            });
+            $("#closbtn").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
+
+        function showModal(action) {
+            var url = "/Controls/" + action;
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (data) {
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal('show');
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        }
+    </script>
+}

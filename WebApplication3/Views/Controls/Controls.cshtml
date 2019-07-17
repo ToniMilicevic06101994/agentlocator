@@ -1,0 +1,17 @@
+﻿@model WebApplication3.Models.ControlsModel
+
+@if (!ViewBag.Editable)
+{
+    <h3>Controls</h3>
+    @Html.Partial("../Shared/Content", @Model)
+    <br />
+    <br />
+    @Html.ActionLink(WebApplication3.Common.Constants.EDITOR_NAVIGATION_MESSAGE, WebApplication3.Common.Constants.ACTION_EDITOR)
+}
+else
+{
+    @Html.Partial("../Shared/Content", @Model)
+    <br />
+    <br />
+    @Html.ActionLink(WebApplication3.Common.Constants.WEBSITE_NAVIGATION_MESSAGE, WebApplication3.Common.Constants.ACTION_WEBSITE)
+}
